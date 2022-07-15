@@ -5,7 +5,7 @@ const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text>Home</Text>
-            <Button title='Detalle' onPress={() => navigation.navigate('ProductDetail')} />
+            <Button title='Detalle' onPress={() => navigation.navigate('Auth')} />
         </View>
     )
 }

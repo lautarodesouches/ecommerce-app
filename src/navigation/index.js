@@ -7,7 +7,7 @@ const AppNavigator = () => {
         <NavigationContainer>
             <StatusBar
                 translucent
-                backgroundColor='#000'
+                backgroundColor='transparent'
                 barStyle='default'
             />
             <MainNavigator />
