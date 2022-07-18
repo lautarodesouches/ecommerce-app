@@ -3,7 +3,7 @@ import { secondaryBg } from '../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
-        margin: 10,
+        margin: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'stretch',
@@ -25,7 +25,8 @@ export const styles = StyleSheet.create({
     },
     searchIcon: {
         flex: .15,
-        textAlign: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     cartIconContainer: {
         borderColor: secondaryBg,
