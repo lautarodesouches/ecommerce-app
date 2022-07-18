@@ -11,14 +11,9 @@ const MainNavigator = () => {
     return (
         <Stack.Navigator
             initialRouteName='Home'
-            screenOptions={{ headerTitleAlign: 'center' }}
+            screenOptions={{ headerShown: false }}
         >
-            <Stack.Group
-                screenOptions={{
-                    headerStyle: { backgroundColor: primaryBg },
-                    headerTintColor: primaryText,
-                }}
-            >
+            <Stack.Group>
                 <Stack.Screen
                     name='Home'
                     component={HomeScreen}

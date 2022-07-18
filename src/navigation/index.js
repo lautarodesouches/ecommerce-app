@@ -5,11 +5,7 @@ import MainNavigator from './Main'
 const AppNavigator = () => {
     return (
         <NavigationContainer>
-            <StatusBar
-                translucent
-                backgroundColor='transparent'
-                barStyle='default'
-            />
+            <StatusBar />
             <MainNavigator />
         </NavigationContainer>
     )
