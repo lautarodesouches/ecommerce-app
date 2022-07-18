@@ -1,11 +1,22 @@
+import { useEffect, useState } from 'react'
 import { SectionList, Text, View } from 'react-native'
 import { Header, ProductPreview } from '../../components'
+import { items } from '../../constants/products'
 import { styles } from './styles'
 
 const HomeScreen = ({ navigation }) => {
 
-    const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    const data2 = [12, 13, 14, 15, 16, 17, 18, 19, 20]
+    const [recommended, setRecommended] = useState([])
+    const [offers, setOffers] = useState([])
+
+    useEffect(() => {
+        let recommended = [...items.sort((a, b) => b.amountAvailable - a.amountAvailable)]
+        recommended.length = 4
+        setRecommended(recommended)
+        let offers = [...items.filter(e => e.discount > 0)]
+        offers.length = 4
+        setOffers(offers)
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -16,13 +27,13 @@ const HomeScreen = ({ navigation }) => {
                 sections={[
                     {
                         title: 'Productos Recomendados',
-                        data: data2,
-                        renderItem: ({ item }) => <ProductPreview productId={item} />
+                        data: recommended,
+                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} />
                     },
                     {
                         title: 'Ofertas',
-                        data: data,
-                        renderItem: ({ item }) => <ProductPreview productId={item} />
+                        data: offers,
+                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} />
                     },
                 ]}
                 keyExtractor={(_, index) => index}

@@ -3,7 +3,12 @@ import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useState } from 'react'
 
-const ProductPreview = ({ productId }) => {
+const ProductPreview = ({ item }) => {
+
+    //const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description } = item
+    const { id, name, price, discount, freeShipping } = item
+
+    const newPrice = price - price * discount / 100
 
     const [isFavourite, setIsFavourite] = useState(false)
 
@@ -15,25 +20,29 @@ const ProductPreview = ({ productId }) => {
         <View style={styles.container}>
             <TouchableOpacity style={styles.product} onPress={handleProductPress}>
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: `https://lautarodesouches.github.io/ecommerce/img/${productId}-1.png` }} style={styles.image} />
+                    <Image source={{ uri: `https://lautarodesouches.github.io/ecommerce/img/${id}-1.png` }} style={styles.image} />
                 </View>
                 <View style={styles.info}>
-                    <Text style={styles.oldPrice}>
-                        ${5500}
-                    </Text>
+                    {
+                        !!discount && (
+                            <Text style={styles.oldPrice}>
+                                ${price}
+                            </Text>
+                        )
+                    }
                     <View style={styles.newPrice}>
                         <Text style={styles.price}>
-                            ${5200}
+                            ${discount ? newPrice : price}
                         </Text>
                         <Text style={styles.discount}>
-                            7%
+                            {discount ? discount + '%' : ''}
                         </Text>
                     </View>
                     <Text style={styles.title}>
-                        Auriculares in-ear inalámbricos Soundpeats
+                        {name}
                     </Text>
                     <Text style={styles.freeShipping}>
-                        Envío gratis!
+                        {freeShipping && 'Envío gratis!'}
                     </Text>
                 </View>
             </TouchableOpacity>
