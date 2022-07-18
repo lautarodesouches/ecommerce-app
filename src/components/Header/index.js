@@ -18,6 +18,7 @@ const Header = () => {
                     style={styles.searchInput}
                     value={query}
                     onChangeText={e => setQuery(e)}
+                    placeholder='Buscar'
                 />
                 <TouchableOpacity onPress={goToSearch} style={styles.searchIcon}>
                     <Ionicons name="search" size={30} color={secondaryBg} />

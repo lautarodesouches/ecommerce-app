@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
         fontSize: 25,
         textAlign: 'center',
         marginVertical: 15,
+        fontFamily: 'LatoRegular',
     },
     sectionList: {
         flex: 1,

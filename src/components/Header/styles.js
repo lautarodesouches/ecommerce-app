@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
         borderColor: secondaryBg,
         borderRightWidth: 1,
         fontSize: 20,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        fontFamily: 'LatoRegular',
     },
     searchIcon: {
         flex: .15,
