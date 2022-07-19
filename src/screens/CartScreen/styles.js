@@ -57,5 +57,14 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         marginVertical: 5,
+    },
+    emptyContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    emptyText: {
+        fontSize: 20,
+        marginBottom: 20
     }
 })

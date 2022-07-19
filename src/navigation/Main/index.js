@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { primaryBg, primaryText, secondaryBg, secondaryText } from '../../constants/colors'
+import { secondaryBg, secondaryText } from '../../constants/colors'
 import { AuthScreen, CartScreen, CheckoutScreen, HomeScreen, ProductDetailScreen, SearchScreen } from '../../screens'
 
 const Stack = createNativeStackNavigator()
@@ -36,28 +36,21 @@ const MainNavigator = () => {
                     headerTintColor: secondaryText,
                 }}
             >
-                {
-                    isLoggedIn
-                        ?
-                        <>
-                            <Stack.Screen
-                                name='Cart'
-                                component={CartScreen}
-                                options={{ title: 'Carrito' }}
-                            />
-                            <Stack.Screen
-                                name='Checkout'
-                                component={CheckoutScreen}
-                                options={{ title: 'Checkout' }}
-                            />
-                        </>
-                        :
-                        <Stack.Screen
-                            name='Auth'
-                            component={AuthScreen}
-                            options={{ title: 'Autenticacion' }}
-                        />
-                }
+                <Stack.Screen
+                    name='Cart'
+                    component={CartScreen}
+                    options={{ title: 'Carrito' }}
+                />
+                <Stack.Screen
+                    name='Checkout'
+                    component={isLoggedIn ? CheckoutScreen : AuthScreen}
+                    options={{ title: 'Checkout' }}
+                />
+                <Stack.Screen
+                    name='Auth'
+                    component={AuthScreen}
+                    options={{ title: 'Autenticacion' }}
+                />
             </Stack.Group>
         </Stack.Navigator>
     )

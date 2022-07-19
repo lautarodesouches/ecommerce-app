@@ -3,22 +3,32 @@ import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { secondaryBg } from '../../constants/colors'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { changeQuery } from '../../store/search.slice'
 
-const Header = () => {
+const Header = ({navigation}) => {
 
-    const [query, setQuery] = useState('')
+    const [localQuery, setLocalQuery] = useState('')
 
-    const goToSearch = () => console.log('search')
-    const goToCart = () => console.log('cart')
+    const dispatch = useDispatch()
+
+    const goToSearch = () => {
+        dispatch(
+            changeQuery({query: localQuery})
+        )
+        navigation.navigate('Search')
+    }
+    const goToCart = () => navigation.navigate('Cart')
 
     return (
         <View style={styles.container}>
             <View style={styles.searchContainer}>
                 <TextInput
                     style={styles.searchInput}
-                    value={query}
-                    onChangeText={e => setQuery(e)}
+                    value={localQuery}
+                    onChangeText={e => setLocalQuery(e)}
                     placeholder='Buscar'
+                    onEndEditing={goToSearch}
                 />
                 <TouchableOpacity onPress={goToSearch} style={styles.searchIcon}>
                     <Ionicons name="search" size={30} color={secondaryBg} />

@@ -4,9 +4,13 @@ import { PrimaryButton } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
 import { styles } from './styles'
 
-const CartScreen = () => {
+const CartScreen = ({ navigation }) => {
 
     const cart = useSelector(state => state.product.cart)
+
+    const handleCheckout = () => {
+        navigation.navigate('Checkout')
+    }
 
     const renderItem = ({ item }) => (
         <View style={styles.item}>
@@ -30,16 +34,29 @@ const CartScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Carrito:</Text>
-            <FlatList
-                data={cart}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-            />
-            <View style={styles.totalContainer}>
-                <Text style={styles.total}>Total: ${cart.reduce((acc, item) => acc + Math.round(item.pricePerItem * item.quantity), 0)}</Text>
-                <PrimaryButton title='Checkout' />
-            </View>
+            {
+                cart.length > 0
+                    ?
+                    <>
+                        <Text style={styles.title}>Carrito:</Text>
+                        <FlatList
+                            data={cart}
+                            renderItem={renderItem}
+                            keyExtractor={item => item.id}
+                        />
+                        <View style={styles.totalContainer}>
+                            <Text style={styles.total}>Total: ${cart.reduce((acc, item) => acc + Math.round(item.pricePerItem * item.quantity), 0)}</Text>
+                            <PrimaryButton title='Checkout' onPress={handleCheckout} />
+                        </View>
+                    </>
+                    :
+                    <View style={styles.emptyContainer}>
+                        <Text style={styles.emptyText}>El carrito se encuentra vacio</Text>
+                        <PrimaryButton onPress={() => navigation.goBack()} title='Volver atrás' />
+                    </View>
+
+            }
+
         </View>
     )
 }

@@ -16,7 +16,6 @@ let recommended = shuffle(
 // Limit 4
 recommended.length = 4
 
-
 const initialState = {
     products,
     offers,

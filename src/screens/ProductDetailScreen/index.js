@@ -48,7 +48,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Header />
+            <Header navigation={navigation} />
             <View style={styles.product}>
                 <View style={styles.categoryBrand}>
                     <Text style={styles.categoryBrandText}>{`${category} > ${brand}`}</Text>
