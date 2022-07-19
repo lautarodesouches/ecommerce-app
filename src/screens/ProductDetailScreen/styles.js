@@ -117,5 +117,12 @@ export const styles = StyleSheet.create({
     actionButtons: {
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
+    freeShipping: {
+        marginTop: 15,
+        color: 'green',
+        fontSize: 20,
+        textAlign: 'center',
+        fontFamily: 'LatoBold',
+    },
 })
