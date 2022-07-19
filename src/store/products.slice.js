@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Item from '../models/item'
+import CartItem from '../models/CartItem'
 import { shuffle } from '../utils/functions'
 import { products } from '../utils/products'
 
@@ -28,7 +28,7 @@ const productSlice = createSlice({
     initialState,
     reducers: {
         addItemToCart: (state, action) => {
-            const item = new Item(
+            const item = new CartItem(
                 action.payload.id,
                 action.payload.name,
                 action.payload.pricePerItem,

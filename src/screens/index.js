@@ -1,3 +1,4 @@
+export { default as AddProductScreen } from './AddProductScreen'
 export { default as AuthScreen } from './AuthScreen'
 export { default as CartScreen } from './CartScreen'
 export { default as CheckoutScreen } from './CheckoutScreen'

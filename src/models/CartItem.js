@@ -1,4 +1,4 @@
-class Item {
+class CartItem {
     constructor(id, name, pricePerItem, freeShipping, quantity) {
         this.id = id,
             this.name = name,
@@ -8,4 +8,4 @@ class Item {
     }
 }
 
-export default Item
+export default CartItem

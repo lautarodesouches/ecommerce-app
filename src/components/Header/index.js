@@ -28,6 +28,8 @@ const Header = ({ navigation }) => {
     }
     const goToCart = () => navigation.navigate('Cart')
 
+    const handleAddProduct = () => navigation.navigate('AddProduct')
+
     return (
         <View style={styles.container}>
             <View style={styles.searchContainer}>
@@ -40,6 +42,11 @@ const Header = ({ navigation }) => {
                 />
                 <TouchableOpacity onPress={goToSearch} style={styles.searchIcon}>
                     <Ionicons name="search" size={30} color={secondaryBg} />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.addProduct}>
+            <TouchableOpacity onPress={handleAddProduct}>
+                    <Ionicons name="add" size={30} color={secondaryBg} />
                 </TouchableOpacity>
             </View>
             <View style={styles.cartIconContainer}>

@@ -1,12 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useSelector } from 'react-redux'
 import { secondaryBg, secondaryText } from '../../constants/colors'
-import { AuthScreen, CartScreen, CheckoutScreen, HomeScreen, ProductDetailScreen, SearchScreen } from '../../screens'
+import { AddProductScreen, AuthScreen, CartScreen, CheckoutScreen, HomeScreen, ProductDetailScreen, SearchScreen } from '../../screens'
 
 const Stack = createNativeStackNavigator()
 
 const MainNavigator = () => {
 
-    const isLoggedIn = true
+    const userId = useSelector(state => state.auth.userId)
 
     return (
         <Stack.Navigator
@@ -37,13 +38,18 @@ const MainNavigator = () => {
                 }}
             >
                 <Stack.Screen
+                    name='AddProduct'
+                    component={true ? AddProductScreen : AuthScreen}
+                    options={{ title: 'Checkout' }}
+                />
+                <Stack.Screen
                     name='Cart'
                     component={CartScreen}
                     options={{ title: 'Carrito' }}
                 />
                 <Stack.Screen
                     name='Checkout'
-                    component={isLoggedIn ? CheckoutScreen : AuthScreen}
+                    component={userId ? CheckoutScreen : AuthScreen}
                     options={{ title: 'Checkout' }}
                 />
                 <Stack.Screen
