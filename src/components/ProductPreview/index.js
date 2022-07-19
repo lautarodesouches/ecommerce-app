@@ -2,10 +2,10 @@ import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useState } from 'react'
+import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
 
 const ProductPreview = ({ item, handleSelected }) => {
 
-    //const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description } = item
     const { id, name, price, discount, freeShipping } = item
 
     const newPrice = price - price * discount / 100
@@ -18,7 +18,7 @@ const ProductPreview = ({ item, handleSelected }) => {
         <View style={styles.container}>
             <TouchableOpacity style={styles.product} onPress={handleSelected}>
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: `https://lautarodesouches.github.io/ecommerce/img/${id}-1.png` }} style={styles.image} />
+                    <Image source={{ uri: `${PRODUCT_IMAGE_URL}${id}-1.png` }} style={styles.image} />
                 </View>
                 <View style={styles.info}>
                     {

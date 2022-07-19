@@ -1,0 +1,1 @@
+export const PRODUCT_IMAGE_URL = 'https://lautarodesouches.github.io/ecommerce/img/'

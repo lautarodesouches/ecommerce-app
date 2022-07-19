@@ -11,7 +11,7 @@ const HomeScreen = ({ navigation }) => {
     const recommended = useSelector(state => state.product.recommended)
     const offers = useSelector(state => state.product.offers)
 
-    const handleSelected = item => navigation.navigate('ProductDetail', { item })
+    const handleSelected = itemId => navigation.navigate('ProductDetail', { itemId: itemId })
 
     return (
         <View style={styles.container}>
@@ -23,12 +23,12 @@ const HomeScreen = ({ navigation }) => {
                     {
                         title: 'Productos Recomendados',
                         data: recommended,
-                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} handleSelected={() => handleSelected(item)} />
+                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} handleSelected={() => handleSelected(item.id)} />
                     },
                     {
                         title: 'Ofertas',
                         data: offers,
-                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} handleSelected={() => handleSelected(item)} />
+                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} handleSelected={() => handleSelected(item.id)} />
                     },
                 ]}
                 keyExtractor={(_, index) => index}

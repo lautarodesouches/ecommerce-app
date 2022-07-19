@@ -11,7 +11,7 @@ export const products = [
         "stars": 4.1,
         "amountAvailable": 2,
         "freeShipping": false,
-        "availableImages": 5,
+        "availableImages": 4,
         "availableColors": [
             "rojo",
             "gris",
