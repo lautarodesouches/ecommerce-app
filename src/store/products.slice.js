@@ -42,12 +42,15 @@ const productSlice = createSlice({
                 item.quantity += itemInCart.quantity
                 state.cart = state.cart.filter(el => el.id !== itemInCart.id)
             }
-            
+
             state.cart = [...state.cart, item]
+        },
+        deleteItem: (state, action) => {
+            state.cart = state.cart.filter(el => el.id !== action.payload.id)
         }
     }
 })
 
-export const { addItemToCart } = productSlice.actions
+export const { addItemToCart, deleteItem } = productSlice.actions
 
 export default productSlice.reducer

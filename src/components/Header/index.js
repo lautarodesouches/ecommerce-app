@@ -1,20 +1,28 @@
-import { TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { secondaryBg } from '../../constants/colors'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { changeQuery } from '../../store/search.slice'
+import { useEffect } from 'react'
 
-const Header = ({navigation}) => {
-
-    const [localQuery, setLocalQuery] = useState('')
+const Header = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
+    const [localQuery, setLocalQuery] = useState('')
+    const [cartLength, setCartLength] = useState(0)
+
+    const cart = useSelector(state => state.product.cart)
+
+    useEffect(() => {
+        setCartLength(cart.length)
+    }, [cart])
+
     const goToSearch = () => {
         dispatch(
-            changeQuery({query: localQuery})
+            changeQuery({ query: localQuery })
         )
         navigation.navigate('Search')
     }
@@ -37,6 +45,11 @@ const Header = ({navigation}) => {
             <View style={styles.cartIconContainer}>
                 <TouchableOpacity onPress={goToCart}>
                     <Ionicons name="cart" size={30} color={secondaryBg} />
+                    {
+                        cartLength > 0 && (
+                            <Text style={styles.searchQty}>{cartLength}</Text>
+                        )
+                    }
                 </TouchableOpacity>
             </View>
         </View>

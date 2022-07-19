@@ -1,10 +1,13 @@
-import { FlatList, Image, Text, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import { PrimaryButton } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
+import { deleteItem } from '../../store/products.slice'
 import { styles } from './styles'
 
 const CartScreen = ({ navigation }) => {
+
+    const dispatch = useDispatch()
 
     const cart = useSelector(state => state.product.cart)
 
@@ -12,8 +15,17 @@ const CartScreen = ({ navigation }) => {
         navigation.navigate('Checkout')
     }
 
+    const handleDeleteItem = id => {
+        dispatch(
+            deleteItem({ id })
+        )
+    }
+
     const renderItem = ({ item }) => (
         <View style={styles.item}>
+            <TouchableOpacity style={styles.itemDelete} onPress={() => handleDeleteItem(item.id)}>
+                <Text style={styles.itemDeleteText}>X</Text>
+            </TouchableOpacity>
             <View style={styles.itemSection}>
                 <Image source={{ uri: `${PRODUCT_IMAGE_URL}${item.id}-1.png` }} style={styles.image} />
             </View>
@@ -41,6 +53,7 @@ const CartScreen = ({ navigation }) => {
                         <Text style={styles.title}>Carrito:</Text>
                         <FlatList
                             data={cart}
+                            extraData={cart}
                             renderItem={renderItem}
                             keyExtractor={item => item.id}
                         />

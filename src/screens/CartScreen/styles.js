@@ -66,5 +66,19 @@ export const styles = StyleSheet.create({
     emptyText: {
         fontSize: 20,
         marginBottom: 20
+    },
+    itemDelete: {
+        backgroundColor: 'crimson',
+        paddingVertical: 4,
+        paddingHorizontal: 8,
+        borderRadius: 50,
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        margin: 10,
+        zIndex: 99,
+    },
+    itemDeleteText: {
+        color: 'white',
     }
 })

@@ -29,6 +29,18 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    searchQty: {
+        position: 'absolute',
+        top: -15,
+        right: -15,
+        fontSize: 16,
+        backgroundColor: 'crimson',
+        color: 'white',
+        alignSelf:'center',
+        borderRadius: 50,
+        paddingHorizontal: 8,
+        paddingVertical: 1,
+    },
     cartIconContainer: {
         borderColor: secondaryBg,
         borderWidth: 1,
