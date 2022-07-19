@@ -1,6 +1,8 @@
 import { SafeAreaView } from 'react-native'
 import AppNavigator from './src/navigation'
 import { useFonts } from 'expo-font'
+import { Provider } from 'react-redux'
+import { store } from './src/store'
 
 const App = () => {
 
@@ -14,9 +16,11 @@ const App = () => {
   if (!loaded) return null
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <AppNavigator />
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <AppNavigator />
+      </SafeAreaView>
+    </Provider>
   )
 }
 

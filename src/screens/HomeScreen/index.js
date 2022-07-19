@@ -1,22 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SectionList, Text, View } from 'react-native'
 import { Header, ProductPreview } from '../../components'
-import { items } from '../../constants/products'
 import { styles } from './styles'
+import { useSelector, useDispatch } from 'react-redux'
 
 const HomeScreen = ({ navigation }) => {
 
-    const [recommended, setRecommended] = useState([])
-    const [offers, setOffers] = useState([])
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        let recommended = [...items.sort((a, b) => b.amountAvailable - a.amountAvailable)]
-        recommended.length = 4
-        setRecommended(recommended)
-        let offers = [...items.filter(e => e.discount > 0)]
-        offers.length = 4
-        setOffers(offers)
-    }, [])
+    const recommended = useSelector(state => state.product.recommended)
+    const offers = useSelector(state => state.product.offers)
+
+    const handleSelected = item => navigation.navigate('ProductDetail', { item })
 
     return (
         <View style={styles.container}>
@@ -28,12 +23,12 @@ const HomeScreen = ({ navigation }) => {
                     {
                         title: 'Productos Recomendados',
                         data: recommended,
-                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} />
+                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} handleSelected={() => handleSelected(item)} />
                     },
                     {
                         title: 'Ofertas',
                         data: offers,
-                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} />
+                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} handleSelected={() => handleSelected(item)} />
                     },
                 ]}
                 keyExtractor={(_, index) => index}

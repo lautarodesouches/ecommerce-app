@@ -3,7 +3,7 @@ import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useState } from 'react'
 
-const ProductPreview = ({ item }) => {
+const ProductPreview = ({ item, handleSelected }) => {
 
     //const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description } = item
     const { id, name, price, discount, freeShipping } = item
@@ -14,11 +14,9 @@ const ProductPreview = ({ item }) => {
 
     const handleFavourite = () => setIsFavourite(!isFavourite)
 
-    const handleProductPress = () => console.log('Producto')
-
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.product} onPress={handleProductPress}>
+            <TouchableOpacity style={styles.product} onPress={handleSelected}>
                 <View style={styles.imageContainer}>
                     <Image source={{ uri: `https://lautarodesouches.github.io/ecommerce/img/${id}-1.png` }} style={styles.image} />
                 </View>

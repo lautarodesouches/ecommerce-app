@@ -1,4 +1,4 @@
-export const items = [
+export const products = [
     {
         "id": 1,
         "name": "Notebook Exo Smart P33 Intel N4020",
