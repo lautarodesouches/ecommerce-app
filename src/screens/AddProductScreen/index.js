@@ -105,6 +105,7 @@ const AddProductScreen = ({ navigation }) => {
                 placeholder='10000'
                 onChangeText={setPrice}
                 onEndEditing={() => { }}
+                keyboardType='numeric'
             />
             <CustomInput
                 labelColor='black'
@@ -114,6 +115,7 @@ const AddProductScreen = ({ navigation }) => {
                 placeholder='10000'
                 onChangeText={setAmounAvailable}
                 onEndEditing={() => { }}
+                keyboardType='numeric'
             />
             <CustomInput
                 labelColor='black'

@@ -39,7 +39,7 @@ const MainNavigator = () => {
             >
                 <Stack.Screen
                     name='AddProduct'
-                    component={true ? AddProductScreen : AuthScreen}
+                    component={userId ? AddProductScreen : AuthScreen}
                     options={{ title: 'Checkout' }}
                 />
                 <Stack.Screen

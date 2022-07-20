@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import CartItem from '../models/CartItem'
+import { URL_API } from '../utils/firebase'
 import { shuffle } from '../utils/functions'
 import { products } from '../utils/products'
 
@@ -49,6 +50,10 @@ const productSlice = createSlice({
         deleteCartItem: (state, action) => {
             state.cart = state.cart.filter(el => el.id !== action.payload.id)
         },
+        cleanCart: (state, action) => {
+            console.log('clean');
+            state.cart = []
+        },
         addNewProduct: (state, action) => {
 
             const newProduct = {
@@ -76,6 +81,36 @@ const productSlice = createSlice({
     }
 })
 
-export const { addItemToCart, deleteCartItem, addNewProduct } = productSlice.actions
+export const checkout = (cart, total) => {
+    console.log('checkout')
+    return async dispatch => {
+        try {
+            const response = await fetch(`${URL_API}/orders.json`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    date: Date.now(),
+                    items: cart,
+                    total
+                })
+            })
+
+            const result = await response.json()
+
+            console.log('result',result)
+
+            dispatch(
+                cleanCart()
+            )
+
+        } catch (error) {
+            console.log('error', error)
+        }
+    }
+}
+
+export const { addItemToCart, deleteCartItem, cleanCart, addNewProduct } = productSlice.actions
 
 export default productSlice.reducer

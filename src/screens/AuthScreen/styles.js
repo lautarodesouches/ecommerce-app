@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { primaryBg, primaryText, themeBg } from '../../constants/colors'
+import { primaryBg, primaryText, themeBg, themeText } from '../../constants/colors'
 
 export const styles = StyleSheet.create({
     keyboard: {
@@ -23,5 +23,28 @@ export const styles = StyleSheet.create({
     buttonContainer: {
         marginTop: 20,
         alignItems: 'center',
+    },
+    messageContainer: {
+        flexDirection: 'row',
+        marginTop: 30,
+        justifyContent: 'center'
+    },
+    message: {
+        fontSize: 18,
+        fontFamily: 'LatoRegular'
+    },
+    messageButtonContainer: {
+        marginLeft: 5,
+    },
+    messageButton: {
+        fontSize: 18,
+        color: primaryBg,
+        fontFamily: 'LatoBold',
+    },
+    error: {
+        marginTop: 30,
+        textAlign: 'center',
+        fontSize: 20,
+        color: themeText,
     },
 })

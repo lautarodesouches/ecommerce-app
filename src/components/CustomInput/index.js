@@ -8,8 +8,9 @@ const CustomInput = ({
     value,
     onChangeText,
     placeholder,
-    textContentType,
-    onEndEditing
+    textContentType = 'none',
+    keyboardType = 'default',
+    onEndEditing = () => { }
 }) => {
     return (
         <View style={styles.container}>
@@ -22,6 +23,8 @@ const CustomInput = ({
                 value={value}
                 textContentType={textContentType}
                 onEndEditing={e => onEndEditing(e)}
+                secureTextEntry={textContentType === 'password'}
+                keyboardType={keyboardType}
             />
             {
                 !!helper && <Text style={styles.helper}>{helper}</Text>
