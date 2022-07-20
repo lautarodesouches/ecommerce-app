@@ -14,10 +14,10 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: 'white',
         borderRadius: 5,
-        flex: .6,
+        flex: .5,
     },
     searchInput: {
-        flex: .85,
+        flex: .8,
         borderColor: secondaryBg,
         borderRightWidth: 1,
         fontSize: 20,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         fontFamily: 'LatoRegular',
     },
     searchIcon: {
-        flex: .15,
+        flex: .2,
         alignItems: 'center',
         justifyContent: 'center',
     },

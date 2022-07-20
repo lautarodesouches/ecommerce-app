@@ -89,7 +89,6 @@ const productSlice = createSlice({
 })
 
 export const checkout = (cart, total) => {
-    console.log('checkout')
     return async dispatch => {
         try {
             const response = await fetch(`${URL_API}/orders.json`, {

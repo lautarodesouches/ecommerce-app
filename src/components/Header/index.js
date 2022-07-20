@@ -26,10 +26,8 @@ const Header = ({ navigation }) => {
         )
         navigation.navigate('Search')
     }
-    const goToCart = () => navigation.navigate('Cart')
 
-    const handleAddProduct = () => navigation.navigate('AddProduct')
-    const handleGoToFavourites = () => navigation.navigate('Favourites')
+    const navigate = screen => navigation.navigate(screen)
 
     return (
         <View style={styles.container}>
@@ -46,17 +44,22 @@ const Header = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.iconContainer}>
-                <TouchableOpacity onPress={handleGoToFavourites}>
+                <TouchableOpacity onPress={() => navigate('Orders')}>
+                    <Ionicons name="file-tray-full" size={30} color={secondaryBg} />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.iconContainer}>
+                <TouchableOpacity onPress={() => navigate('Favourites')}>
                     <Ionicons name="heart" size={30} color={secondaryBg} />
                 </TouchableOpacity>
             </View>
             <View style={styles.iconContainer}>
-                <TouchableOpacity onPress={handleAddProduct}>
+                <TouchableOpacity onPress={() => navigate('AddProduct')}>
                     <Ionicons name="add" size={30} color={secondaryBg} />
                 </TouchableOpacity>
             </View>
             <View style={styles.iconContainer}>
-                <TouchableOpacity onPress={goToCart}>
+                <TouchableOpacity onPress={() => navigate('Cart')}>
                     <Ionicons name="cart" size={30} color={secondaryBg} />
                     {
                         cartLength > 0 && (

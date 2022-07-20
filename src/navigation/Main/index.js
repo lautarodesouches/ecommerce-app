@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useSelector } from 'react-redux'
 import { secondaryBg, secondaryText } from '../../constants/colors'
-import { AddProductScreen, AuthScreen, CartScreen, CheckoutScreen, FavouritesScreen, HomeScreen, ProductDetailScreen, SearchScreen } from '../../screens'
+import { AddProductScreen, AuthScreen, CartScreen, CheckoutScreen, FavouritesScreen, HomeScreen, OrdersScreen, ProductDetailScreen, SearchScreen } from '../../screens'
 
 const Stack = createNativeStackNavigator()
 
@@ -34,6 +34,11 @@ const MainNavigator = () => {
                     name='Favourites'
                     component={FavouritesScreen}
                     options={{ title: 'Favoritos' }}
+                />
+                <Stack.Screen
+                    name='Orders'
+                    component={OrdersScreen}
+                    options={{ title: 'Ordenes' }}
                 />
             </Stack.Group>
             <Stack.Group
