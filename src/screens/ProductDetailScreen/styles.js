@@ -112,7 +112,12 @@ export const styles = StyleSheet.create({
     selectedQuantity: {
         fontSize: 18,
         textAlign: 'center',
-        marginTop: 20
+        marginTop: 20,
+    },
+    amountAvailable: {
+        fontSize: 16,
+        textAlign: 'center',
+        marginTop: 20,
     },
     actionButtons: {
         alignItems: 'center',

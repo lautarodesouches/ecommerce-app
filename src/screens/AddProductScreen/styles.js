@@ -34,18 +34,22 @@ export const styles = StyleSheet.create({
     },
     imageContainer: {
         backgroundColor: 'white',
-        height: 250,
+        height: 200,
         borderWidth: 1,
         borderColor: themeText,
         borderRadius: 5,
-        padding: 5,
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: 10,
     },
     image: {
         flex: 1,
-        width: null,
-        height: null,
+        width: '100%',
+        height: '100%',
         resizeMode: 'contain'
+    },
+    sumbitButtonContainer: {
+        marginTop: 10,
+        marginBottom: 30,
     }
 })

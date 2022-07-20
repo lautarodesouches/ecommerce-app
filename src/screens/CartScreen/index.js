@@ -2,7 +2,7 @@ import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { PrimaryButton } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
-import { deleteItem } from '../../store/products.slice'
+import { deleteCartItem } from '../../store/products.slice'
 import { styles } from './styles'
 
 const CartScreen = ({ navigation }) => {
@@ -17,7 +17,7 @@ const CartScreen = ({ navigation }) => {
 
     const handleDeleteItem = id => {
         dispatch(
-            deleteItem({ id })
+            deleteCartItem({ id })
         )
     }
 
@@ -27,7 +27,7 @@ const CartScreen = ({ navigation }) => {
                 <Text style={styles.itemDeleteText}>X</Text>
             </TouchableOpacity>
             <View style={styles.itemSection}>
-                <Image source={{ uri: `${PRODUCT_IMAGE_URL}${item.id}-1.png` }} style={styles.image} />
+                <Image source={{ uri: item.imageUri ? item.imageUri : `${PRODUCT_IMAGE_URL}${item.id}-1.png` }} style={styles.image} />
             </View>
             <View style={styles.itemSection}>
                 <Text style={styles.itemTitle}>{item.name}</Text>
@@ -67,9 +67,7 @@ const CartScreen = ({ navigation }) => {
                         <Text style={styles.emptyText}>El carrito se encuentra vacio</Text>
                         <PrimaryButton onPress={() => navigation.goBack()} title='Volver atrás' />
                     </View>
-
             }
-
         </View>
     )
 }

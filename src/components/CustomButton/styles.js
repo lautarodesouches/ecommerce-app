@@ -14,11 +14,11 @@ export const styles = StyleSheet.create({
         shadowColor: themeText,
         shadowOffset: {
             width: 0,
-            height: 5,
+            height: 2,
         },
-        shadowOpacity: 0.36,
-        shadowRadius: 6.68,
-        elevation: 11,
+        shadowOpacity: 0.16,
+        shadowRadius: 3.68,
+        elevation: 6,
     },
     text: {
         color: themeBg,

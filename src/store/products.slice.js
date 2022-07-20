@@ -34,23 +34,48 @@ const productSlice = createSlice({
                 action.payload.pricePerItem,
                 action.payload.freeShipping,
                 action.payload.quantity,
+                action.payload.imageUri
             )
 
             let itemInCart = state.cart.find(el => el.id === action.payload.id)
 
             if (itemInCart) {
-                item.quantity += itemInCart.quantity
+                if (item.amountAvailable >= item.quantity + itemInCart.quantity) item.quantity += itemInCart.quantity
                 state.cart = state.cart.filter(el => el.id !== itemInCart.id)
             }
 
             state.cart = [...state.cart, item]
         },
-        deleteItem: (state, action) => {
+        deleteCartItem: (state, action) => {
             state.cart = state.cart.filter(el => el.id !== action.payload.id)
+        },
+        addNewProduct: (state, action) => {
+
+            const newProduct = {
+                id: Math.random() * (100 - 21) + 21,
+                name: action.payload.name,
+                brand: 'Marca',
+                category: 'Categoria',
+                price: action.payload.price,
+                discount: 0,
+                sold: 0,
+                opinions: 0,
+                stars: 0,
+                amountAvailable: action.payload.amountAvailable,
+                amountAvailable: 1,
+                freeShipping: true,
+                availableImages: 0,
+                availableColors: ['negro'],
+                description: action.payload.description,
+                imageUri: action.payload.imageUri,
+            }
+
+            state.products.push(newProduct)
+            state.recommended.unshift(newProduct)
         }
     }
 })
 
-export const { addItemToCart, deleteItem } = productSlice.actions
+export const { addItemToCart, deleteCartItem, addNewProduct } = productSlice.actions
 
 export default productSlice.reducer

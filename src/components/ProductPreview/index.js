@@ -18,7 +18,7 @@ const ProductPreview = ({ item, handleSelected }) => {
         <View style={styles.container}>
             <TouchableOpacity style={styles.product} onPress={handleSelected}>
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: `${PRODUCT_IMAGE_URL}${id}-1.png` }} style={styles.image} />
+                    <Image source={{ uri: item.imageUri ? item.imageUri : `${PRODUCT_IMAGE_URL}${id}-1.png` }} style={styles.image} />
                 </View>
                 <View style={styles.info}>
                     {

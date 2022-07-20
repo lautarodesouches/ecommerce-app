@@ -11,7 +11,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
     const { itemId } = route.params
 
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
 
     const item = useSelector(state => state.product.products.find(item => item.id === itemId))
 
@@ -27,15 +27,18 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handleRemove = () => {
         if (selectedQuantity > 1) setSelectedQuantity(selectedQuantity - 1)
     }
-    const handleAdd = () => setSelectedQuantity(selectedQuantity + 1)
-
+    const handleAdd = () => {
+        if (selectedQuantity < amountAvailable) setSelectedQuantity(selectedQuantity + 1)
+    }
+    
     const handleBuy = () => {
-        dispath(addItemToCart({
+        dispatch(addItemToCart({
             id,
             name,
             pricePerItem: (discount ? newPrice : price),
             freeShipping,
-            quantity: selectedQuantity
+            quantity: selectedQuantity,
+            imageUri: item.imageUri,
         }))
         navigation.navigate('Cart')
     }
@@ -55,7 +58,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 </View>
                 <View style={styles.images}>
                     <View style={styles.mainImageContainer}>
-                        <Image source={{ uri: `${PRODUCT_IMAGE_URL}${id}-${currentImage}.png` }} style={styles.mainImage} />
+                        <Image source={{ uri: item.imageUri ? item.imageUri : `${PRODUCT_IMAGE_URL}${id}-${currentImage}.png` }} style={styles.mainImage} />
                     </View>
                     <View style={styles.flatListContainer}>
                         {
@@ -89,6 +92,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 </View>
                 <View>
                     <Text style={styles.selectedQuantity}>Cantidad seleccionada: {selectedQuantity}</Text>
+                    <Text style={styles.amountAvailable}>Cantidad disponible: {amountAvailable}</Text>
                     <View style={styles.buttons}>
                         <SecondaryButton onPress={handleRemove} title='-' />
                         <SecondaryButton onPress={handleAdd} title='+' />
