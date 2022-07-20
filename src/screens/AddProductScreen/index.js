@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Alert, Image, ScrollView, Text, TextInput, View } from 'react-native'
-import { PrimaryButton, SecondaryButton } from '../../components'
+import { Alert, Image, ScrollView, Text, View } from 'react-native'
+import { CustomInput, PrimaryButton, SecondaryButton } from '../../components'
 import { styles } from './styles'
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch } from 'react-redux'
@@ -88,52 +88,42 @@ const AddProductScreen = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>Agregar producto</Text>
-            <View style={styles.inputContainer}>
-                <Text style={styles.text}>Nombre del producto:</Text>
-                <TextInput
-                    value={name}
-                    autoCapitalize={'sentences'}
-                    onChangeText={e => setName(e)}
-                    placeholder='Nombre del producto'
-                    placeholderTextColor='black'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.text}>Precio del producto:</Text>
-                <TextInput
-                    value={price}
-                    autoCapitalize={'sentences'}
-                    onChangeText={e => setPrice(e)}
-                    placeholder='Precio del producto'
-                    placeholderTextColor='black'
-                    style={styles.input}
-                    keyboardType={'number-pad'}
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.text}>Cantidad del producto:</Text>
-                <TextInput
-                    value={amountAvailable}
-                    autoCapitalize={'sentences'}
-                    onChangeText={e => setAmounAvailable(e)}
-                    placeholder='Cantidad del producto'
-                    placeholderTextColor='black'
-                    style={styles.input}
-                    keyboardType={'number-pad'}
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.text}>Descripcion del producto:</Text>
-                <TextInput
-                    value={description}
-                    autoCapitalize={'sentences'}
-                    onChangeText={e => setDescription(e)}
-                    placeholder='Descripcion del producto'
-                    placeholderTextColor='black'
-                    style={styles.input}
-                />
-            </View>
+            <CustomInput
+                labelColor='black'
+                label='Nombre del producto'
+                helper={''}
+                value={name}
+                placeholder='Smart TV'
+                onChangeText={setName}
+                onEndEditing={() => { }}
+            />
+            <CustomInput
+                labelColor='black'
+                label='Precio del producto'
+                helper={''}
+                value={price}
+                placeholder='10000'
+                onChangeText={setPrice}
+                onEndEditing={() => { }}
+            />
+            <CustomInput
+                labelColor='black'
+                label='Cantidad del producto'
+                helper={''}
+                value={amountAvailable}
+                placeholder='10000'
+                onChangeText={setAmounAvailable}
+                onEndEditing={() => { }}
+            />
+            <CustomInput
+                labelColor='black'
+                label='Descripcion del producto'
+                helper={''}
+                value={description}
+                placeholder='Descripcion del producto'
+                onChangeText={setDescription}
+                onEndEditing={() => { }}
+            />
             <View style={styles.inputContainer}>
                 <Text style={styles.text}>Imagen del producto:</Text>
                 <View style={styles.imageContainer}>
