@@ -1,9 +1,9 @@
 import { View } from 'react-native'
+import { styles } from './styles'
 
 const OrdersScreen = () => {
     return(
-        <View>
-
+        <View style={styles.container}>
         </View>
     )
 }

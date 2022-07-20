@@ -11,17 +11,24 @@ const SearchScreen = ({ navigation }) => {
 
     const [filteredProducts, setFilteredProducts] = useState([])
 
+    const search = () => {
+        setFilteredProducts(
+            products.filter(product => product.name.toLowerCase().includes(query) || product.brand.toLowerCase().includes(query) || product.category.toLowerCase().includes(query))
+        )
+    }
 
     useEffect(() => {
-        setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(query) || product.brand.toLowerCase().includes(query) || product.category.toLowerCase().includes(query)))
+        search()
     }, [query])
+
+    const resetSearch = () => setFilteredProducts(products)
 
     const renderItem = ({ item }) => <ProductPreview handleSelected={() => navigation.navigate('ProductDetail', { itemId: item.id })} item={item} />
 
     const ListEmptyComponent = () => (
         <View style={styles.emptyContainer}>
             <Text style={styles.emptyText}>No se encontraron productos que coincidan con esa búsqueda</Text>
-            <SecondaryButton title='Ver todos' />
+            <SecondaryButton title='Ver todos' onPress={resetSearch} />
         </View>
     )
 

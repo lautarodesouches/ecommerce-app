@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: 'white',
         borderRadius: 5,
-        flex: .7,
+        flex: .6,
     },
     searchInput: {
         flex: .85,
@@ -41,16 +41,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 8,
         paddingVertical: 1,
     },
-    cartIconContainer: {
-        borderColor: secondaryBg,
-        borderWidth: 1,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 5,
-        flex: .1,
-    },
-    addProduct: {
+    iconContainer: {
         borderColor: secondaryBg,
         borderWidth: 1,
         backgroundColor: 'white',

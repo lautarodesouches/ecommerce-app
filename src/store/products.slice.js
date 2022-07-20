@@ -21,7 +21,8 @@ const initialState = {
     products,
     offers,
     recommended,
-    cart: []
+    cart: [],
+    favourites: []
 }
 
 const productSlice = createSlice({
@@ -51,11 +52,17 @@ const productSlice = createSlice({
             state.cart = state.cart.filter(el => el.id !== action.payload.id)
         },
         cleanCart: (state, action) => {
-            console.log('clean');
             state.cart = []
         },
+        addFavourite: (state, action) => {
+            console.log('ADD');
+            state.favourites.push(action.payload.item)
+        },
+        removeFavourite: (state, action) => {
+            console.log('REMOVE');
+            state.favourites = state.favourites.filter(el => el.id !== action.payload.id)
+        },
         addNewProduct: (state, action) => {
-
             const newProduct = {
                 id: Math.random() * (100 - 21) + 21,
                 name: action.payload.name,
@@ -99,7 +106,7 @@ export const checkout = (cart, total) => {
 
             const result = await response.json()
 
-            console.log('result',result)
+            console.log('result', result)
 
             dispatch(
                 cleanCart()
@@ -111,6 +118,6 @@ export const checkout = (cart, total) => {
     }
 }
 
-export const { addItemToCart, deleteCartItem, cleanCart, addNewProduct } = productSlice.actions
+export const { addItemToCart, deleteCartItem, cleanCart, addNewProduct, addFavourite, removeFavourite } = productSlice.actions
 
 export default productSlice.reducer

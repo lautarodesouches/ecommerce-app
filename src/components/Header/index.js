@@ -29,6 +29,7 @@ const Header = ({ navigation }) => {
     const goToCart = () => navigation.navigate('Cart')
 
     const handleAddProduct = () => navigation.navigate('AddProduct')
+    const handleGoToFavourites = () => navigation.navigate('Favourites')
 
     return (
         <View style={styles.container}>
@@ -44,12 +45,17 @@ const Header = ({ navigation }) => {
                     <Ionicons name="search" size={30} color={secondaryBg} />
                 </TouchableOpacity>
             </View>
-            <View style={styles.addProduct}>
-            <TouchableOpacity onPress={handleAddProduct}>
+            <View style={styles.iconContainer}>
+                <TouchableOpacity onPress={handleGoToFavourites}>
+                    <Ionicons name="heart" size={30} color={secondaryBg} />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.iconContainer}>
+                <TouchableOpacity onPress={handleAddProduct}>
                     <Ionicons name="add" size={30} color={secondaryBg} />
                 </TouchableOpacity>
             </View>
-            <View style={styles.cartIconContainer}>
+            <View style={styles.iconContainer}>
                 <TouchableOpacity onPress={goToCart}>
                     <Ionicons name="cart" size={30} color={secondaryBg} />
                     {

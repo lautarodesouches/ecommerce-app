@@ -1,18 +1,33 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { useState } from 'react'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
+import { useSelector, useDispatch } from 'react-redux'
+import { addFavourite, removeFavourite } from '../../store/products.slice'
 
 const ProductPreview = ({ item, handleSelected }) => {
+
+    const dispatch = useDispatch()
 
     const { id, name, price, discount, freeShipping } = item
 
     const newPrice = price - price * discount / 100
 
-    const [isFavourite, setIsFavourite] = useState(false)
+    const favourites = useSelector(state => state.product.favourites)
 
-    const handleFavourite = () => setIsFavourite(!isFavourite)
+    const findIfIsFavourite = () => (
+        !!favourites.find(item => item.id === id)
+    )
+
+    const handleFavourite = () => {
+        dispatch(
+            findIfIsFavourite()
+                ?
+                removeFavourite({ id })
+                :
+                addFavourite({ item })
+        )
+    }
 
     return (
         <View style={styles.container}>
@@ -45,7 +60,7 @@ const ProductPreview = ({ item, handleSelected }) => {
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleFavourite} style={styles.favourite}>
-                <Ionicons name={isFavourite ? 'heart' : 'heart-outline'} size={30} color={isFavourite ? 'red' : 'black'} />
+                <Ionicons name={findIfIsFavourite() ? 'heart' : 'heart-outline'} size={30} color={findIfIsFavourite() ? 'red' : 'black'} />
             </TouchableOpacity>
         </View>
     )
