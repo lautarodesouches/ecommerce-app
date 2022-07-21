@@ -58,12 +58,46 @@ export const insertProduct = (id, name, brand, category, price, discount, sold, 
 
 }
 
-export const getProducts = () => {
+export const getAllProducts = () => {
 
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
                 `SELECT * FROM ${productsTable}`,
+                [],
+                (_, result) => resolve(result),
+                (_, error) => reject(error)
+            )
+        })
+    })
+
+    return promise
+
+}
+
+export const getOffers = () => {
+
+    const promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `SELECT * FROM ${productsTable} ORDER BY discount DESC LIMIT 4`,
+                [],
+                (_, result) => resolve(result),
+                (_, error) => reject(error)
+            )
+        })
+    })
+
+    return promise
+
+}
+
+export const getRecommended = () => {
+
+    const promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `SELECT * FROM ${productsTable} ORDER BY amountAvailable ASC LIMIT 4`,
                 [],
                 (_, result) => resolve(result),
                 (_, error) => reject(error)

@@ -1,12 +1,28 @@
 import { SectionList, Text, View } from 'react-native'
 import { Header, ProductPreview } from '../../components'
 import { styles } from './styles'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { loadOffers, loadProducts, loadRecommended } from '../../store/products.slice'
 
 const HomeScreen = ({ navigation }) => {
 
+    const dispatch = useDispatch()
+
     const recommended = useSelector(state => state.product.recommended)
     const offers = useSelector(state => state.product.offers)
+
+    useEffect(() => {
+        dispatch(
+            loadProducts()
+        )
+        dispatch(
+            loadOffers()
+        )
+        dispatch(
+            loadRecommended()
+        )
+    }, [])
 
     const handleSelected = itemId => navigation.navigate('ProductDetail', { itemId: itemId })
 

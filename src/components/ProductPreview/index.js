@@ -55,7 +55,7 @@ const ProductPreview = ({ item, handleSelected }) => {
                         {name}
                     </Text>
                     <Text style={styles.freeShipping}>
-                        {freeShipping && 'Envío gratis!'}
+                        {!!freeShipping && 'Envío gratis!'}
                     </Text>
                 </View>
             </TouchableOpacity>

@@ -8,7 +8,7 @@ import { changeQuery } from '../../store/search.slice'
 import { useEffect } from 'react'
 
 const Header = ({ navigation }) => {
-    
+
     const dispatch = useDispatch()
 
     const cart = useSelector(state => state.product.cart)
@@ -27,10 +27,18 @@ const Header = ({ navigation }) => {
         dispatch(
             changeQuery({ query: localQuery })
         )
-        navigation.navigate('Search')
+        if (localQuery) {
+            navigation.navigate('Search')
+        }
     }
 
-    const navigate = screen => navigation.navigate(screen)
+    const navigate = screen => {
+        setLocalQuery('')
+        dispatch(
+            changeQuery({ query: '' })
+        )
+        navigation.navigate(screen)
+    }
 
     const handleSearchFocus = () => setDisplayIcon(false)
     const handleSearchBlur = () => setDisplayIcon(true)

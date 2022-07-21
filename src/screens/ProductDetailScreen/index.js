@@ -75,13 +75,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
                         !!discount && (
                             <View style={styles.newPriceContainer}>
                                 <Text style={styles.newPrice}>${newPrice}</Text>
-                                <Text style={styles.discount}>%{discount}</Text>
+                                <Text style={styles.discount}>{discount}%</Text>
                             </View>
                         )
                     }
                 </View>
                 <View>
-                    <Text style={styles.freeShipping}>{freeShipping && 'Envío Gratis!'}</Text>
+                    <Text style={styles.freeShipping}>{!!freeShipping && 'Envío Gratis!'}</Text>
                 </View>
                 <View >
                     <Text style={styles.description}>{description}</Text>

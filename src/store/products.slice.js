@@ -1,26 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getAllProducts, getOffers, getRecommended } from '../db'
 import CartItem from '../models/CartItem'
 import { URL_API } from '../utils/firebase'
-import { shuffle } from '../utils/functions'
-import { products } from '../utils/products'
-
-// Offers
-let offers = shuffle(
-    [...products.filter(e => e.discount > 0)]
-)
-// Limit 4
-offers.length = 4
-// Recommended
-let recommended = shuffle(
-    [...products.sort((a, b) => b.amountAvailable - a.amountAvailable)]
-)
-// Limit 4
-recommended.length = 4
 
 const initialState = {
-    products,
-    offers,
-    recommended,
+    products: [],
+    offers: [],
+    recommended: [],
     cart: [],
     favourites: []
 }
@@ -59,7 +45,7 @@ const productSlice = createSlice({
         },
         addNewProduct: (state, action) => {
             const newProduct = {
-                id: Math.random() * (100 - 21) + 21,
+                id: new Date().valueOf(),
                 name: action.payload.name,
                 brand: 'Marca',
                 category: 'Categoria',
@@ -79,9 +65,72 @@ const productSlice = createSlice({
 
             state.products.push(newProduct)
             state.recommended.unshift(newProduct)
+        },
+        setProducts: (state, action) => {
+            state.products = action.payload
+        },
+        setOffers: (state, action) => {
+            state.offers = action.payload
+        },
+        setRecommended: (state, action) => {
+            state.recommended = action.payload
         }
     }
 })
+
+export const loadProducts = () => {
+    return async dispatch => {
+        try {
+            let result = await getAllProducts()
+
+            for (let i = 0; i < result.rows._array.length; i++) {
+                result.rows._array[i].availableColors = JSON.parse(result.rows._array[i].availableColors)
+            }
+
+            dispatch(
+                setProducts(result.rows._array)
+            )
+        } catch (error) {
+            throw error
+        }
+    }
+}
+
+export const loadOffers = () => {
+    return async dispatch => {
+        try {
+            let result = await getOffers()
+
+            for (let i = 0; i < result.rows._array.length; i++) {
+                result.rows._array[i].availableColors = JSON.parse(result.rows._array[i].availableColors)
+            }
+
+            dispatch(
+                setOffers(result.rows._array)
+            )
+        } catch (error) {
+            throw error
+        }
+    }
+}
+
+export const loadRecommended = () => {
+    return async dispatch => {
+        try {
+            let result = await getRecommended()
+
+            for (let i = 0; i < result.rows._array.length; i++) {
+                result.rows._array[i].availableColors = JSON.parse(result.rows._array[i].availableColors)
+            }
+
+            dispatch(
+                setRecommended(result.rows._array)
+            )
+        } catch (error) {
+            throw error
+        }
+    }
+}
 
 export const checkout = (cart, total) => {
     return async dispatch => {
@@ -112,6 +161,16 @@ export const checkout = (cart, total) => {
     }
 }
 
-export const { addItemToCart, deleteCartItem, cleanCart, addNewProduct, addFavourite, removeFavourite } = productSlice.actions
+export const {
+    addItemToCart,
+    deleteCartItem,
+    cleanCart,
+    addFavourite,
+    removeFavourite,
+    addNewProduct,
+    setProducts,
+    setOffers,
+    setRecommended
+} = productSlice.actions
 
 export default productSlice.reducer

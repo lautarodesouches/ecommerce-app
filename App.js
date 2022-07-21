@@ -3,7 +3,7 @@ import AppNavigator from './src/navigation'
 import { useFonts } from 'expo-font'
 import { Provider } from 'react-redux'
 import { store } from './src/store'
-import { getProducts, init, insertProduct } from './src/db'
+import { getAllProducts, init, insertProduct } from './src/db'
 import { products } from './src/utils/products'
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
     .then(() => console.log('-- Database init --'))
     .catch(error => console.log(error))
 
-  getProducts()
+  getAllProducts()
     .then(result => {
       console.log('PRODUCTS LENGTH => ', result.rows.length)
       if (result.rows.length === 0) {
@@ -48,7 +48,7 @@ const App = () => {
         console.log('-- Productos insertados --')
       }
     })
-    .catch(error => console.log('GET PRODUCTS => ', error));
+    .catch(error => console.log('GET PRODUCTS => ', error))
 
   return (
     <Provider store={store}>
