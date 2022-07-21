@@ -41,15 +41,9 @@ const productSlice = createSlice({
 
             let itemInCart = state.cart.find(el => el.id === action.payload.id)
 
-            if (itemInCart) {
-                console.log('QTY', itemInCart.quantity)
-                console.log('ACT QTY', item.quantity )
-                if (item.amountAvailable >= item.quantity + itemInCart.quantity) itemInCart.quantity =  itemInCart.quantity + item.quantity 
-                console.log('NEW', itemInCart.quantity)
-                state.cart = state.cart.filter(el => el.id !== itemInCart.id)
-            }
+            if (itemInCart) state.cart = state.cart.filter(el => el.id !== itemInCart.id)
 
-            state.cart = [...state.cart, itemInCart]
+            state.cart = [...state.cart, item]
         },
         deleteCartItem: (state, action) => {
             state.cart = state.cart.filter(el => el.id !== action.payload.id)
