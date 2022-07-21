@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
         marginBottom: 20,
     },
     contentContainer: {
-        padding: '5%',
         flexGrow: 1,
     },
 })

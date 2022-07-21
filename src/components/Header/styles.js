@@ -3,7 +3,8 @@ import { primaryBg } from '../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
-        margin: 20,
+        marginHorizontal: 10,
+        marginVertical: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'stretch',
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
         fontFamily: 'LatoRegular',
     },
     searchIcon: {
-        flex: .2,
+        flex: .3,
         alignItems: 'center',
         justifyContent: 'center',
     },

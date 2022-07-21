@@ -1,4 +1,4 @@
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { primaryBg } from '../../constants/colors'
@@ -32,13 +32,16 @@ const Header = ({ navigation }) => {
 
     const navigate = screen => navigation.navigate(screen)
 
-    const handleSearchFocus = () => {
-        setDisplayIcon(!displayIcon)
+    const handleSearchFocus = () => setDisplayIcon(false)
+    const handleSearchBlur = () => setDisplayIcon(true)
+    const handleShowMenu = () => {
+        Keyboard.dismiss()
+        setDisplayIcon(true)
     }
 
     return (
         <View style={styles.container}>
-            <View style={[styles.searchContainer, { flex: displayIcon ? .5 : 1 }]}>
+            <View style={[styles.searchContainer, { flex: displayIcon ? .4 : .8 }]}>
                 <TextInput
                     style={styles.searchInput}
                     value={localQuery}
@@ -46,10 +49,15 @@ const Header = ({ navigation }) => {
                     placeholder='Buscar'
                     onEndEditing={goToSearch}
                     onFocus={handleSearchFocus}
-                    onBlur={handleSearchFocus}
+                    onBlur={handleSearchBlur}
                 />
                 <TouchableOpacity onPress={goToSearch} style={styles.searchIcon}>
                     <Ionicons name="search" size={30} color={primaryBg} />
+                </TouchableOpacity>
+            </View>
+            <View style={[styles.iconContainer, { display: displayIcon ? 'flex' : 'none' }]}>
+                <TouchableOpacity onPress={() => navigate('Home')}>
+                    <Ionicons name="home" size={30} color={primaryBg} />
                 </TouchableOpacity>
             </View>
             <View style={[styles.iconContainer, { display: displayIcon ? 'flex' : 'none' }]}>
@@ -75,6 +83,11 @@ const Header = ({ navigation }) => {
                             <Text style={styles.searchQty}>{cartLength}</Text>
                         )
                     }
+                </TouchableOpacity>
+            </View>
+            <View style={[styles.iconContainer, { display: !displayIcon ? 'flex' : 'none' }]}>
+                <TouchableOpacity onPress={handleShowMenu}>
+                    <Ionicons name="menu" size={30} color={primaryBg} />
                 </TouchableOpacity>
             </View>
         </View>

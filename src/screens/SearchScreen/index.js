@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, Keyboard, Text, View } from 'react-native'
 import { styles } from './styles'
 import { useSelector } from 'react-redux'
 import { Header, ProductPreview, SecondaryButton } from '../../components'
@@ -31,6 +31,7 @@ const SearchScreen = ({ navigation }) => {
             <SecondaryButton title='Ver todos' onPress={resetSearch} />
         </View>
     )
+    const handleListSroll = () => Keyboard.dismiss()
 
     return (
         <View style={styles.container}>
@@ -41,6 +42,7 @@ const SearchScreen = ({ navigation }) => {
                 renderItem={renderItem}
                 ListEmptyComponent={ListEmptyComponent}
                 contentContainerStyle={styles.contentContainer}
+                onScroll={handleListSroll}
             />
         </View>
     )

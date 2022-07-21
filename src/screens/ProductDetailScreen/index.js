@@ -94,8 +94,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     <Text style={styles.selectedQuantity}>Cantidad seleccionada: {selectedQuantity}</Text>
                     <Text style={styles.amountAvailable}>Cantidad disponible: {amountAvailable}</Text>
                     <View style={styles.buttons}>
-                        <CustomButton buttonStyle={{backgroundColor: '#cc0000'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleAdd} title={'-'} />
-                        <CustomButton buttonStyle={{backgroundColor: '#006600'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleRemove} title={'+'} />
+                        <CustomButton buttonStyle={{backgroundColor: '#cc0000'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleRemove} title={'-'} />
+                        <CustomButton buttonStyle={{backgroundColor: '#006600'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleAdd} title={'+'} />
                     </View>
                 </View>
                 <View style={styles.actionButtons}>

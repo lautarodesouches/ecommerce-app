@@ -21,6 +21,6 @@ export const styles = StyleSheet.create({
     },
     contentContainer: {
         flexGrow: 1,
-        paddingHorizontal: '5%',
+        paddingHorizontal: '2.5%',
     }
 })
