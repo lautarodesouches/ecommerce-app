@@ -55,11 +55,9 @@ const productSlice = createSlice({
             state.cart = []
         },
         addFavourite: (state, action) => {
-            console.log('ADD');
             state.favourites.push(action.payload.item)
         },
         removeFavourite: (state, action) => {
-            console.log('REMOVE');
             state.favourites = state.favourites.filter(el => el.id !== action.payload.id)
         },
         addNewProduct: (state, action) => {

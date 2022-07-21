@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { secondaryBg } from '../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
@@ -9,6 +10,8 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
+        borderColor: secondaryBg,
+        borderWidth: 1,
     },
     product: {
         flex: 1,

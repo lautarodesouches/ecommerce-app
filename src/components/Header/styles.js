@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { secondaryBg } from '../../constants/colors'
+import { primaryBg } from '../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
@@ -10,15 +10,14 @@ export const styles = StyleSheet.create({
     },
     searchContainer: {
         flexDirection: 'row',
-        borderColor: secondaryBg,
+        borderColor: primaryBg,
         borderWidth: 1,
         backgroundColor: 'white',
         borderRadius: 5,
-        flex: .5,
     },
     searchInput: {
         flex: .8,
-        borderColor: secondaryBg,
+        borderColor: primaryBg,
         borderRightWidth: 1,
         fontSize: 20,
         paddingHorizontal: 10,
@@ -42,7 +41,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 1,
     },
     iconContainer: {
-        borderColor: secondaryBg,
+        borderColor: primaryBg,
         borderWidth: 1,
         backgroundColor: 'white',
         alignItems: 'center',

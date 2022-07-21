@@ -22,6 +22,6 @@ export const styles = StyleSheet.create({
     },
     text: {
         color: themeBg,
-        fontSize: 16,
+        fontSize: 18,
     }
 })

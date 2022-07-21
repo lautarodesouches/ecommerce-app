@@ -1,7 +1,7 @@
 import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import { styles } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { Header, PrimaryButton, SecondaryButton } from '../../components'
+import { CustomButton, Header, PrimaryButton, SecondaryButton } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
 import { useState } from 'react'
 import { primaryBg, themeBg } from '../../constants/colors'
@@ -94,8 +94,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     <Text style={styles.selectedQuantity}>Cantidad seleccionada: {selectedQuantity}</Text>
                     <Text style={styles.amountAvailable}>Cantidad disponible: {amountAvailable}</Text>
                     <View style={styles.buttons}>
-                        <SecondaryButton onPress={handleRemove} title='-' />
-                        <SecondaryButton onPress={handleAdd} title='+' />
+                        <CustomButton buttonStyle={{backgroundColor: '#cc0000'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleAdd} title={'-'} />
+                        <CustomButton buttonStyle={{backgroundColor: '#006600'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleRemove} title={'+'} />
                     </View>
                 </View>
                 <View style={styles.actionButtons}>
