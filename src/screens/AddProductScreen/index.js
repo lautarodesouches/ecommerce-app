@@ -4,7 +4,7 @@ import { CustomInput, PrimaryButton, SecondaryButton } from '../../components'
 import { styles } from './styles'
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch } from 'react-redux'
-import { addNewProduct } from '../../store/product.slice'
+import { createProduct } from '../../store/product.slice'
 
 const AddProductScreen = ({ navigation }) => {
 
@@ -68,18 +68,12 @@ const AddProductScreen = ({ navigation }) => {
         }
 
         dispatch(
-            addNewProduct({
-                name,
-                price,
-                amountAvailable,
-                description,
-                imageUri
-            })
+            createProduct(name, price, amountAvailable, description, imageUri)
         )
 
         Alert.alert(
-            'Producto añadido',
-            'Se ha añadito tu producto exitosamente. Estará junto a los recomendados!',
+            'Producto añadido!',
+            'Estará junto a los recién añadidos!',
             [{ text: 'Ir al inicio', onPress: goHome }]
         )
 

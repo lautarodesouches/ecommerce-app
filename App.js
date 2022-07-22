@@ -23,30 +23,20 @@ const App = () => {
 
   getDataFromTableProducts(GET_PRODUCTS_QUERY)
     .then(result => {
+
       console.log('PRODUCTS LENGTH => ', result.rows.length)
+
       if (result.rows.length === 0) {
         console.log('-- Insertando productos --')
         products.forEach(product => {
           console.log('Insertando producto ' + product.id)
-          insertProduct(
-            product.id,
-            product.name,
-            product.brand,
-            product.category,
-            product.price,
-            product.discount,
-            product.sold,
-            product.opinions,
-            product.stars,
-            product.amountAvailable,
-            product.freeShipping,
-            product.availableImages,
-            product.availableColors,
-            product.description
-          )
+          insertProduct(product)
         })
+
         console.log('-- Productos insertados --')
+
       }
+
     })
     .catch(error => console.log('GET PRODUCTS => ', error))
 

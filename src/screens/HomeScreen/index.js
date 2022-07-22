@@ -3,26 +3,36 @@ import { Header, ProductPreview } from '../../components'
 import { styles } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { loadOffers, loadProducts, loadRecommended } from '../../store/product.slice'
+import { loadDataFromTableProducts } from '../../store/product.slice'
 
 const HomeScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
+    const latest = useSelector(state => state.product.latest)
     const recommended = useSelector(state => state.product.recommended)
     const offers = useSelector(state => state.product.offers)
 
     useEffect(() => {
         dispatch(
-            loadProducts()
-        )
-        dispatch(
-            loadOffers()
-        )
-        dispatch(
-            loadRecommended()
+            loadDataFromTableProducts('products')
         )
     }, [])
+
+    useEffect(() => {
+        dispatch(
+            loadDataFromTableProducts('latest')
+        )
+    }, [latest])
+
+    useEffect(() => {
+        dispatch(
+            loadDataFromTableProducts('recommended')
+        )
+        dispatch(
+            loadDataFromTableProducts('offers')
+        )
+    }, [recommended])
 
     const handleSelected = itemId => navigation.navigate('ProductDetail', { itemId: itemId })
 
@@ -33,6 +43,11 @@ const HomeScreen = ({ navigation }) => {
                 style={styles.sectionList}
                 renderSectionHeader={({ section: { title } }) => <Text style={styles.sectionTitle}>{title}</Text>}
                 sections={[
+                    {
+                        title: 'Recien añadidos',
+                        data: latest,
+                        renderItem: ({ item }) => <ProductPreview key={item.id} item={item} handleSelected={() => handleSelected(item.id)} />
+                    },
                     {
                         title: 'Productos Recomendados',
                         data: recommended,
