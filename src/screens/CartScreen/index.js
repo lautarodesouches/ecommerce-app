@@ -1,6 +1,6 @@
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { PrimaryButton } from '../../components'
+import { Header, PrimaryButton } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
 import { deleteCartItem } from '../../store/product.slice'
 import { styles } from './styles'
@@ -46,11 +46,11 @@ const CartScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Header navigation={navigation} />
             {
                 cart.length > 0
                     ?
                     <>
-                        <Text style={styles.title}>Carrito:</Text>
                         <FlatList
                             data={cart}
                             extraData={cart}

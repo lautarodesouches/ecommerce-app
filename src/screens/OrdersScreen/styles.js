@@ -4,7 +4,7 @@ import { primaryBg, primaryText, themeBg } from '../../constants/colors'
 export const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        backgroundColor: themeBg,        
+        backgroundColor: themeBg,
     },
     orderContainer: {
         backgroundColor: primaryBg,
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginVertical: 20,
+        marginVertical: 10,
     },
     orderText: {
         color: primaryText,
@@ -22,5 +22,8 @@ export const styles = StyleSheet.create({
     contentContainer: {
         flexGrow: 1,
         paddingHorizontal: '2.5%',
+    },
+    flatList: {
+        flex: 1,
     }
 })
