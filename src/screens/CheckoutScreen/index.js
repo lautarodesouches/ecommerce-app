@@ -5,7 +5,7 @@ import { primaryText } from '../../constants/colors'
 import { styles } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateAuth } from '../../store/auth.slice'
-import { checkout } from '../../store/products.slice'
+import { checkout } from '../../store/product.slice'
 
 const CheckoutScreen = ({ navigation }) => {
 

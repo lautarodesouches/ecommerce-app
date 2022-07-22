@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getAllProducts, getOffers, getRecommended } from '../db'
+import { getDataFromTableProducts, GET_OFFERS_QUERY, GET_PRODUCTS_QUERY, GET_RECOMMENDED_QUERY } from '../db'
 import CartItem from '../models/CartItem'
 import { URL_API } from '../utils/firebase'
 
@@ -66,29 +66,26 @@ const productSlice = createSlice({
             state.products.push(newProduct)
             state.recommended.unshift(newProduct)
         },
-        setProducts: (state, action) => {
-            state.products = action.payload
+        setArray: (state, action) => {
+            state[action.payload.array] = action.payload.value
         },
-        setOffers: (state, action) => {
-            state.offers = action.payload
-        },
-        setRecommended: (state, action) => {
-            state.recommended = action.payload
-        }
     }
 })
 
 export const loadProducts = () => {
     return async dispatch => {
         try {
-            let result = await getAllProducts()
+            let result = await getDataFromTableProducts(GET_PRODUCTS_QUERY)
 
-            for (let i = 0; i < result.rows._array.length; i++) {
-                result.rows._array[i].availableColors = JSON.parse(result.rows._array[i].availableColors)
-            }
+            result.rows._array.forEach(product => {
+                product.availableColors = JSON.parse(product.availableColors)
+            })
 
             dispatch(
-                setProducts(result.rows._array)
+                setArray({
+                    array: 'products',
+                    value: result.rows._array
+                })
             )
         } catch (error) {
             throw error
@@ -99,14 +96,17 @@ export const loadProducts = () => {
 export const loadOffers = () => {
     return async dispatch => {
         try {
-            let result = await getOffers()
+            let result = await getDataFromTableProducts(GET_OFFERS_QUERY)
 
-            for (let i = 0; i < result.rows._array.length; i++) {
-                result.rows._array[i].availableColors = JSON.parse(result.rows._array[i].availableColors)
-            }
+            result.rows._array.forEach(product => {
+                product.availableColors = JSON.parse(product.availableColors)
+            })
 
             dispatch(
-                setOffers(result.rows._array)
+                setArray({
+                    array: 'offers',
+                    value: result.rows._array
+                })
             )
         } catch (error) {
             throw error
@@ -117,14 +117,17 @@ export const loadOffers = () => {
 export const loadRecommended = () => {
     return async dispatch => {
         try {
-            let result = await getRecommended()
+            let result = await getDataFromTableProducts(GET_RECOMMENDED_QUERY)
 
-            for (let i = 0; i < result.rows._array.length; i++) {
-                result.rows._array[i].availableColors = JSON.parse(result.rows._array[i].availableColors)
-            }
+            result.rows._array.forEach(product => {
+                product.availableColors = JSON.parse(product.availableColors)
+            })
 
             dispatch(
-                setRecommended(result.rows._array)
+                setArray({
+                    array: 'recommended',
+                    value: result.rows._array
+                })
             )
         } catch (error) {
             throw error
@@ -168,9 +171,7 @@ export const {
     addFavourite,
     removeFavourite,
     addNewProduct,
-    setProducts,
-    setOffers,
-    setRecommended
+    setArray,
 } = productSlice.actions
 
 export default productSlice.reducer

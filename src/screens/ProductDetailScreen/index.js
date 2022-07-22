@@ -5,7 +5,7 @@ import { CustomButton, Header, PrimaryButton, SecondaryButton } from '../../comp
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
 import { useState } from 'react'
 import { primaryBg, themeBg } from '../../constants/colors'
-import { addItemToCart } from '../../store/products.slice'
+import { addItemToCart } from '../../store/product.slice'
 
 const ProductDetailScreen = ({ navigation, route }) => {
 

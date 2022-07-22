@@ -3,7 +3,7 @@ import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
 import { useSelector, useDispatch } from 'react-redux'
-import { addFavourite, removeFavourite } from '../../store/products.slice'
+import { addFavourite, removeFavourite } from '../../store/product.slice'
 
 const ProductPreview = ({ item, handleSelected }) => {
 

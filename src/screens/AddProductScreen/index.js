@@ -4,7 +4,7 @@ import { CustomInput, PrimaryButton, SecondaryButton } from '../../components'
 import { styles } from './styles'
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch } from 'react-redux'
-import { addNewProduct } from '../../store/products.slice'
+import { addNewProduct } from '../../store/product.slice'
 
 const AddProductScreen = ({ navigation }) => {
 

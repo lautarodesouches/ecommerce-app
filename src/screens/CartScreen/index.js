@@ -2,7 +2,7 @@ import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { PrimaryButton } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
-import { deleteCartItem } from '../../store/products.slice'
+import { deleteCartItem } from '../../store/product.slice'
 import { styles } from './styles'
 
 const CartScreen = ({ navigation }) => {

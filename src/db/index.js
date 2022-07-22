@@ -2,109 +2,80 @@ import * as SQLite from 'expo-sqlite'
 
 const db = SQLite.openDatabase('products.db')
 
-const productsTable = 'products'
-
-// id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description
-// Length = 14
-
-export const dropTable = () => {
-
-    const promise = new Promise((resolve, reject) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                `DROP TABLE ${productsTable}`,
-                [],
-                () => resolve(),
-                (_, error) => reject(error)
-            )
-        })
-    })
-
-    return promise
-
+const TABLE_PRODUCTS = 'products'
+const PRODUCTS_COL = {
+    ID: 'id',
+    NAME: 'name',
+    BRAND: 'brand',
+    CATEGORY: 'category',
+    PRICE: 'price',
+    DISCOUNT: 'discount',
+    SOLD: 'sold',
+    OPINIONS: 'opinions',
+    STARS: 'stars',
+    AMOUNT_AVAILABLE: 'amountAvailable',
+    FREE_SHIPPING: 'freeShipping',
+    AVAILABLE_IMAGES: 'availableImages',
+    AVAILABLE_COLORS: 'availableColors',
+    DESCRIPTION: 'description'
 }
 
-export const init = () => {
+export const GET_OFFERS_QUERY = `* FROM ${TABLE_PRODUCTS} ORDER BY ${PRODUCTS_COL.DISCOUNT} DESC LIMIT 4`
+export const GET_RECOMMENDED_QUERY = `* FROM ${TABLE_PRODUCTS} ORDER BY ${PRODUCTS_COL.SOLD} DESC LIMIT 4`
+export const GET_PRODUCTS_QUERY = `* FROM ${TABLE_PRODUCTS}`
 
+export const init = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                `CREATE TABLE IF NOT EXISTS ${productsTable}(id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, brand TEXT NOT NULL, category TEXT NOT NULL, price INTEGER NOT NULL, discount INTEGER NOT NULL, sold INTEGER NOT NULL, opinions INTEGER NOT NULL, stars INTEGER NOT NULL, amountAvailable INTEGER NOT NULL, freeShipping INTEGER NOT NULL, availableImages INTEGER NOT NULL, availableColors TEXT NOT NULL, description TEXT NOT NULL)`,
+                `CREATE TABLE IF NOT EXISTS ${TABLE_PRODUCTS}(${PRODUCTS_COL.ID} INTEGER PRIMARY KEY NOT NULL, ${PRODUCTS_COL.NAME} TEXT NOT NULL, ${PRODUCTS_COL.BRAND} TEXT NOT NULL, ${PRODUCTS_COL.CATEGORY} TEXT NOT NULL, ${PRODUCTS_COL.PRICE} INTEGER NOT NULL, ${PRODUCTS_COL.DISCOUNT} INTEGER NOT NULL, ${PRODUCTS_COL.SOLD} INTEGER NOT NULL, ${PRODUCTS_COL.OPINIONS} INTEGER NOT NULL, ${PRODUCTS_COL.STARS} INTEGER NOT NULL, ${PRODUCTS_COL.AMOUNT_AVAILABLE} INTEGER NOT NULL, ${PRODUCTS_COL.FREE_SHIPPING} INTEGER NOT NULL, ${PRODUCTS_COL.AVAILABLE_IMAGES} INTEGER NOT NULL, ${PRODUCTS_COL.AVAILABLE_COLORS} TEXT NOT NULL, ${PRODUCTS_COL.DESCRIPTION} TEXT NOT NULL)`,
                 [],
                 () => resolve(),
                 (_, error) => reject(error)
             )
         })
     })
-
     return promise
-
 }
 
 export const insertProduct = (id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description) => {
-
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                `INSERT INTO ${productsTable} (id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                `INSERT INTO ${TABLE_PRODUCTS} (id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 [id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, JSON.stringify(availableColors), description],
                 (_, result) => resolve(_, result),
                 (_, error) => reject(error)
             )
         })
     })
-
     return promise
-
 }
 
-export const getAllProducts = () => {
-
+export const getDataFromTableProducts = (query) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                `SELECT * FROM ${productsTable}`,
+                `SELECT ${query}`,
                 [],
                 (_, result) => resolve(result),
                 (_, error) => reject(error)
             )
         })
     })
-
     return promise
-
 }
 
-export const getOffers = () => {
-
+export const dropTable = () => {
     const promise = new Promise((resolve, reject) => {
-        db.transaction((tx) => {
+        db.transaction(tx => {
             tx.executeSql(
-                `SELECT * FROM ${productsTable} ORDER BY discount DESC LIMIT 4`,
+                `DROP TABLE ${TABLE_PRODUCTS}`,
                 [],
-                (_, result) => resolve(result),
+                () => resolve(),
                 (_, error) => reject(error)
             )
         })
     })
-
     return promise
-
-}
-
-export const getRecommended = () => {
-
-    const promise = new Promise((resolve, reject) => {
-        db.transaction((tx) => {
-            tx.executeSql(
-                `SELECT * FROM ${productsTable} ORDER BY amountAvailable ASC LIMIT 4`,
-                [],
-                (_, result) => resolve(result),
-                (_, error) => reject(error)
-            )
-        })
-    })
-
-    return promise
-
 }

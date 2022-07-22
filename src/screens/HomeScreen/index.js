@@ -3,7 +3,7 @@ import { Header, ProductPreview } from '../../components'
 import { styles } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { loadOffers, loadProducts, loadRecommended } from '../../store/products.slice'
+import { loadOffers, loadProducts, loadRecommended } from '../../store/product.slice'
 
 const HomeScreen = ({ navigation }) => {
 

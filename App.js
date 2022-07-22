@@ -3,7 +3,7 @@ import AppNavigator from './src/navigation'
 import { useFonts } from 'expo-font'
 import { Provider } from 'react-redux'
 import { store } from './src/store'
-import { getAllProducts, init, insertProduct } from './src/db'
+import { getDataFromTableProducts, GET_PRODUCTS_QUERY, init, insertProduct } from './src/db'
 import { products } from './src/utils/products'
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
     .then(() => console.log('-- Database init --'))
     .catch(error => console.log(error))
 
-  getAllProducts()
+  getDataFromTableProducts(GET_PRODUCTS_QUERY)
     .then(result => {
       console.log('PRODUCTS LENGTH => ', result.rows.length)
       if (result.rows.length === 0) {
