@@ -130,4 +130,11 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'LatoBold',
     },
+    noStock: {
+        fontFamily: 'LatoBold',
+        marginTop: 30,
+        marginBottom: 20,
+        textAlign: 'center',
+        fontSize: 20,
+    }
 })

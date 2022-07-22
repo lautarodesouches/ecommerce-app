@@ -42,7 +42,7 @@ export const init = () => {
 
 export const insertProduct = (product) => {
 
-    const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description,imageUri } = product
+    const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description, imageUri } = product
 
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
@@ -62,6 +62,20 @@ export const getDataFromTableProducts = (query) => {
         db.transaction((tx) => {
             tx.executeSql(
                 `SELECT ${query}`,
+                [],
+                (_, result) => resolve(result),
+                (_, error) => reject(error)
+            )
+        })
+    })
+    return promise
+}
+
+export const updateStockTableProducts = (newStock, id) => {
+    const promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `UPDATE ${TABLE_PRODUCTS} SET ${PRODUCTS_COL.AMOUNT_AVAILABLE} = ${PRODUCTS_COL.AMOUNT_AVAILABLE} - ${newStock}, ${PRODUCTS_COL.SOLD} = ${PRODUCTS_COL.SOLD} + ${newStock} WHERE ${PRODUCTS_COL.ID} = ${id}`,
                 [],
                 (_, result) => resolve(result),
                 (_, error) => reject(error)

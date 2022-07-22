@@ -30,8 +30,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
     const handleAdd = () => {
         if (selectedQuantity < amountAvailable) setSelectedQuantity(selectedQuantity + 1)
     }
-    
+
     const handleBuy = () => {
+        if (selectedQuantity < 1) return
         dispatch(addItemToCart({
             id,
             name,
@@ -90,17 +91,25 @@ const ProductDetailScreen = ({ navigation, route }) => {
                     <Text style={styles.statText}>{sold} vendidos</Text>
                     <Text style={styles.statText}>{opinions} opiniones</Text>
                 </View>
-                <View>
-                    <Text style={styles.selectedQuantity}>Cantidad seleccionada: {selectedQuantity}</Text>
-                    <Text style={styles.amountAvailable}>Cantidad disponible: {amountAvailable}</Text>
-                    <View style={styles.buttons}>
-                        <CustomButton buttonStyle={{backgroundColor: '#cc0000'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleRemove} title={'-'} />
-                        <CustomButton buttonStyle={{backgroundColor: '#006600'}} textStyle={{color: 'white', fontSize: 20}} onPress={handleAdd} title={'+'} />
-                    </View>
-                </View>
-                <View style={styles.actionButtons}>
-                    <PrimaryButton title='Comprar Ahora' onPress={handleBuy} />
-                </View>
+                {
+                    amountAvailable < 1
+                        ?
+                        <Text style={styles.noStock}>Lo sentimos, no hay mas productos disponibles</Text>
+                        :
+                        <>
+                            <View>
+                                <Text style={styles.selectedQuantity}>Cantidad seleccionada: {selectedQuantity}</Text>
+                                <Text style={styles.amountAvailable}>Cantidad disponible: {amountAvailable}</Text>
+                                <View style={styles.buttons}>
+                                    <CustomButton buttonStyle={{ backgroundColor: '#cc0000' }} textStyle={{ color: 'white', fontSize: 20 }} onPress={handleRemove} title={'-'} />
+                                    <CustomButton buttonStyle={{ backgroundColor: '#006600' }} textStyle={{ color: 'white', fontSize: 20 }} onPress={handleAdd} title={'+'} />
+                                </View>
+                            </View>
+                            <View style={styles.actionButtons}>
+                                <PrimaryButton title='Comprar Ahora' onPress={handleBuy} />
+                            </View>
+                        </>
+                }
             </View>
         </ScrollView>
     )

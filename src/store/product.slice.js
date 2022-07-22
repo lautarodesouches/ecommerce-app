@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getDataFromTableProducts, GET_LATEST_QUERY, GET_OFFERS_QUERY, GET_PRODUCTS_QUERY, GET_RECOMMENDED_QUERY, insertProduct } from '../db'
+import { getDataFromTableProducts, GET_LATEST_QUERY, GET_OFFERS_QUERY, GET_PRODUCTS_QUERY, GET_RECOMMENDED_QUERY, insertProduct, updateStockTableProducts } from '../db'
 import CartItem from '../models/CartItem'
 import * as FileSystem from 'expo-file-system'
 import { URL_API } from '../utils/firebase'
@@ -107,7 +107,18 @@ export const checkout = (cart, total) => {
 
             const result = await response.json()
 
-            console.log('result', result)
+            console.log('Checkout/Firebase: ', result)
+
+            cart.forEach(product => {
+                updateStockTableProducts(
+                    product.quantity,
+                    product.id
+                )
+            })
+
+            dispatch(
+                loadDataFromTableProducts('products')
+            )
 
             dispatch(
                 cleanCart()
