@@ -1,7 +1,7 @@
 import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import { styles } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { CustomButton, Header, PrimaryButton, SecondaryButton } from '../../components'
+import { CustomButton, Header, PrimaryButton } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/productImage'
 import { useState } from 'react'
 import { primaryBg, themeBg } from '../../constants/colors'
@@ -15,7 +15,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
     const item = useSelector(state => state.product.products.find(item => item.id === itemId))
 
-    const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description } = item
+    const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, description } = item
 
     const newPrice = price - price * discount / 100
 
@@ -90,6 +90,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 <View style={styles.stats}>
                     <Text style={styles.statText}>{sold} vendidos</Text>
                     <Text style={styles.statText}>{opinions} opiniones</Text>
+                    <Text style={styles.statText}>{stars} estrellas</Text>
                 </View>
                 {
                     amountAvailable < 1

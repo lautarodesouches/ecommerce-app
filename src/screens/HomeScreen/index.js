@@ -8,7 +8,7 @@ import { loadDataFromTableProducts } from '../../store/product.slice'
 const HomeScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
-
+    
     const latest = useSelector(state => state.product.latest)
     const recommended = useSelector(state => state.product.recommended)
     const offers = useSelector(state => state.product.offers)
@@ -17,22 +17,16 @@ const HomeScreen = ({ navigation }) => {
         dispatch(
             loadDataFromTableProducts('products')
         )
-    }, [])
-
-    useEffect(() => {
         dispatch(
             loadDataFromTableProducts('latest')
         )
-    }, [latest])
-
-    useEffect(() => {
         dispatch(
             loadDataFromTableProducts('recommended')
         )
         dispatch(
             loadDataFromTableProducts('offers')
         )
-    }, [recommended])
+    }, [recommended.length])
 
     const handleSelected = itemId => navigation.navigate('ProductDetail', { itemId: itemId })
 

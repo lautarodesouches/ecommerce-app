@@ -23,9 +23,9 @@ const ProductPreview = ({ item, handleSelected }) => {
         dispatch(
             findIfIsFavourite()
                 ?
-                removeFavourite({ id })
+                removeFavourite(id)
                 :
-                addFavourite({ item })
+                addFavourite(item)
         )
     }
 

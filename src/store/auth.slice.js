@@ -17,12 +17,12 @@ const authSlice = createSlice({
     reducers: {
         updateAuth: (state, action) => {
             state.name = action.payload.name || state.name,
-            state.email = action.payload.email || state.email,
-            state.address = action.payload.address || state.address,
-            state.creditCard = action.payload.creditCard || state.creditCard,
-            state.token = action.payload.token || state.token,
-            state.userId = action.payload.userId || state.userId,
-            state.message = action.payload.message || state.message
+                state.email = action.payload.email || state.email,
+                state.address = action.payload.address || state.address,
+                state.creditCard = action.payload.creditCard || state.creditCard,
+                state.token = action.payload.token || state.token,
+                state.userId = action.payload.userId || state.userId,
+                state.message = action.payload.message || state.message
         }
     }
 })

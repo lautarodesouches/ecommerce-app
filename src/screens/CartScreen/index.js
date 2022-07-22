@@ -17,7 +17,7 @@ const CartScreen = ({ navigation }) => {
 
     const handleDeleteItem = id => {
         dispatch(
-            deleteCartItem({ id })
+            deleteCartItem(id)
         )
     }
 

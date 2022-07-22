@@ -34,16 +34,16 @@ const productSlice = createSlice({
             state.cart = [...state.cart, item]
         },
         deleteCartItem: (state, action) => {
-            state.cart = state.cart.filter(el => el.id !== action.payload.id)
+            state.cart = state.cart.filter(el => el.id !== action.payload)
         },
         cleanCart: (state, action) => {
             state.cart = []
         },
         addFavourite: (state, action) => {
-            state.favourites.push(action.payload.item)
+            state.favourites.push(action.payload)
         },
         removeFavourite: (state, action) => {
-            state.favourites = state.favourites.filter(el => el.id !== action.payload.id)
+            state.favourites = state.favourites.filter(el => el.id !== action.payload)
         },
         addProduct: (state, action) => {
             state.products.push(action.payload)
@@ -170,6 +170,10 @@ export const createProduct = (name, price, amountAvailable, description, image) 
 
         dispatch(
             addProduct(newProduct)
+        )
+
+        dispatch(
+            loadDataFromTableProducts('latest')
         )
     }
 }
