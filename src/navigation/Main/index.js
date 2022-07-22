@@ -8,6 +8,7 @@ const Stack = createNativeStackNavigator()
 const MainNavigator = () => {
 
     const userId = useSelector(state => state.auth.userId)
+    const cart = useSelector(state => state.product.cart)
 
     return (
         <Stack.Navigator
@@ -59,7 +60,7 @@ const MainNavigator = () => {
                 />
                 <Stack.Screen
                     name='Checkout'
-                    component={userId ? CheckoutScreen : AuthScreen}
+                    component={userId ? (cart.length > 0 ? CheckoutScreen : CartScreen) : AuthScreen}
                     options={{ title: 'Checkout' }}
                 />
                 <Stack.Screen

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { themeBg, themeText } from '../../constants/colors'
+import { primaryBg, primaryText, secondaryBg, secondaryText, themeBg, themeText } from '../../constants/colors'
 
 export const styles = StyleSheet.create({
     container: {
@@ -51,5 +51,34 @@ export const styles = StyleSheet.create({
     sumbitButtonContainer: {
         marginTop: 10,
         marginBottom: 30,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent:'center',
+        alignItems: 'center',
+        backgroundColor: themeBg,
+    },
+    modalContent: {
+        backgroundColor: secondaryBg,
+        borderRadius: 5,
+        borderColor: secondaryText,
+        borderWidth: 1,
+        paddingHorizontal: 25,
+        paddingVertical: 15,
+    },
+    modalTitle: {
+        fontSize: 22,
+        color: secondaryText,
+        fontFamily: 'LatoRegular',
+    },
+    modalText: {
+        fontSize: 18,
+        color: secondaryText,
+        fontFamily: 'LatoRegular',
+        marginTop: 20,
+    },
+    buttonContainer: {
+        alignItems: 'center',
+        marginTop: 25,
     }
 })

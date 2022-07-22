@@ -22,7 +22,10 @@ const OrdersScreen = ({ navigation }) => {
         return date.toLocaleDateString();
     }
 
-    const renderItem = ({ item }) => (
+    const renderItem = ({ item }) => {
+        console.log(item)
+        return(
+
         <View style={styles.orderContainer}>
             <Text style={styles.orderText}>
                 {formatDate(item.date)}
@@ -34,7 +37,8 @@ const OrdersScreen = ({ navigation }) => {
                 ${item.total}
             </Text>
         </View>
-    )
+        )
+    }
 
     return (
         <View style={styles.container}>

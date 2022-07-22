@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Alert, Image, ScrollView, Text, View } from 'react-native'
+import { Alert, Image, Modal, ScrollView, Text, View } from 'react-native'
 import { CustomInput, PrimaryButton, SecondaryButton } from '../../components'
 import { styles } from './styles'
 import * as ImagePicker from 'expo-image-picker'
@@ -11,6 +11,8 @@ const AddProductScreen = ({ navigation }) => {
     // id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description
 
     const dispatch = useDispatch()
+
+    const [showForm, setShowForm] = useState(true)
 
     const [name, setName] = useState('Smart TV')
     const [price, setPrice] = useState('100000')
@@ -71,72 +73,89 @@ const AddProductScreen = ({ navigation }) => {
             createProduct(name, price, amountAvailable, description, imageUri)
         )
 
-        Alert.alert(
-            'Producto añadido!',
-            'Estará junto a los recién añadidos!',
-            [{ text: 'Ir al inicio', onPress: goHome }]
-        )
+        setShowForm(false)
 
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.title}>Agregar producto</Text>
-            <CustomInput
-                labelColor='black'
-                label='Nombre del producto'
-                helper={''}
-                value={name}
-                placeholder='Smart TV'
-                onChangeText={setName}
-                onEndEditing={() => { }}
-            />
-            <CustomInput
-                labelColor='black'
-                label='Precio del producto'
-                helper={''}
-                value={price}
-                placeholder='10000'
-                onChangeText={setPrice}
-                onEndEditing={() => { }}
-                keyboardType='numeric'
-            />
-            <CustomInput
-                labelColor='black'
-                label='Cantidad del producto'
-                helper={''}
-                value={amountAvailable}
-                placeholder='10000'
-                onChangeText={setAmounAvailable}
-                onEndEditing={() => { }}
-                keyboardType='numeric'
-            />
-            <CustomInput
-                labelColor='black'
-                label='Descripcion del producto'
-                helper={''}
-                value={description}
-                placeholder='Descripcion del producto'
-                onChangeText={setDescription}
-                onEndEditing={() => { }}
-            />
-            <View style={styles.inputContainer}>
-                <Text style={styles.text}>Imagen del producto:</Text>
-                <View style={styles.imageContainer}>
-                    {
-                        imageUri
-                            ?
-                            <Image source={{ uri: imageUri }} style={styles.image} />
-                            :
-                            <Text style={styles.text}>No hay imagen seleccionada</Text>
-                    }
-                </View>
-                <SecondaryButton title='Tomar imagen' onPress={handleTakePicture} />
-            </View>
-            <View style={styles.sumbitButtonContainer}>
-                <PrimaryButton title='Añadir producto' onPress={handleSumbit} />
-            </View>
-        </ScrollView>
+        <>
+            {
+                showForm
+                    ?
+                    <ScrollView style={styles.container}>
+                        <Text style={styles.title}>Agregar producto</Text>
+                        <CustomInput
+                            labelColor='black'
+                            label='Nombre del producto'
+                            helper={''}
+                            value={name}
+                            placeholder='Smart TV'
+                            onChangeText={setName}
+                            onEndEditing={() => { }}
+                        />
+                        <CustomInput
+                            labelColor='black'
+                            label='Precio del producto'
+                            helper={''}
+                            value={price}
+                            placeholder='10000'
+                            onChangeText={setPrice}
+                            onEndEditing={() => { }}
+                            keyboardType='numeric'
+                        />
+                        <CustomInput
+                            labelColor='black'
+                            label='Cantidad del producto'
+                            helper={''}
+                            value={amountAvailable}
+                            placeholder='10000'
+                            onChangeText={setAmounAvailable}
+                            onEndEditing={() => { }}
+                            keyboardType='numeric'
+                        />
+                        <CustomInput
+                            labelColor='black'
+                            label='Descripcion del producto'
+                            helper={''}
+                            value={description}
+                            placeholder='Descripcion del producto'
+                            onChangeText={setDescription}
+                            onEndEditing={() => { }}
+                        />
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.text}>Imagen del producto:</Text>
+                            <View style={styles.imageContainer}>
+                                {
+                                    imageUri
+                                        ?
+                                        <Image source={{ uri: imageUri }} style={styles.image} />
+                                        :
+                                        <Text style={styles.text}>No hay imagen seleccionada</Text>
+                                }
+                            </View>
+                            <SecondaryButton title='Tomar imagen' onPress={handleTakePicture} />
+                        </View>
+                        <View style={styles.sumbitButtonContainer}>
+                            <PrimaryButton title='Añadir producto' onPress={handleSumbit} />
+                        </View>
+                    </ScrollView>
+                    :
+                    <Modal
+                        animationType='slide'
+                        onRequestClose={goHome}
+                    >
+                        <View style={styles.modalContainer}>
+                            <View style={styles.modalContent}>
+                                <Text style={styles.modalTitle}>Producto añadido exitosamente!</Text>
+                                <Text style={styles.modalText}>Podrás encontrar el producto en recien añadidos en la página de inicio y también aparecerá en las búsquedas.</Text>
+                                <View style={styles.buttonContainer}>
+                                    <PrimaryButton onPress={goHome} title='Ir al inicio' />
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
+            }
+        </>
     )
 }
 
