@@ -8,7 +8,7 @@ const initialState = {
     creditCard: null,
     token: null,
     userId: null,
-    message: null,
+    message: null
 }
 
 const authSlice = createSlice({
@@ -16,13 +16,13 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         updateAuth: (state, action) => {
-            state.name = action.payload.name || state.name,
-                state.email = action.payload.email || state.email,
-                state.address = action.payload.address || state.address,
-                state.creditCard = action.payload.creditCard || state.creditCard,
-                state.token = action.payload.token || state.token,
-                state.userId = action.payload.userId || state.userId,
-                state.message = action.payload.message || state.message
+            state.name = action.payload.name || state.name
+            state.email = action.payload.email || state.email
+            state.address = action.payload.address || state.address
+            state.creditCard = action.payload.creditCard || state.creditCard
+            state.token = action.payload.token || state.token
+            state.userId = action.payload.userId || state.userId
+            state.message = action.payload.message || state.message
         }
     }
 })
@@ -33,12 +33,12 @@ export const signUp = (email, password) => {
             const response = await fetch(URL_AUTH_SIGN_UP, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     email,
                     password,
-                    returnSecureToken: true,
+                    returnSecureToken: true
                 }),
             })
 
@@ -65,12 +65,12 @@ export const signIn = (email, password) => {
             const response = await fetch(URL_AUTH_SIGN_IN, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     email,
                     password,
-                    returnSecureToken: true,
+                    returnSecureToken: true
                 }),
             })
 
